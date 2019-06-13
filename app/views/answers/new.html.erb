@@ -1,0 +1,25 @@
+<% if flash[:errors] %>
+    <%= flash[:errors] %>
+<% end %>
+<% if flash[:notice] %>
+    <%= flash[:notice] %>
+<% end %>
+
+<%= form_for @answer do |f| %>
+    <%= f.hidden_field :instructor_id, value: @instructor.id %>
+
+    <%= f.label :user_name, "your name" %>
+    <%= f.text_field :user_name %>
+
+    <p><%= @instructor.name %></p>
+    <% @options.each do |cookie| %>
+        <div>
+            <%= f.radio_button :cookie_id, cookie.id, id: "answer_#{cookie.id}" %>
+            <%= f.label cookie.id, cookie.name %>
+        </div>
+    <% end %>
+    <%= f.submit %>
+<% end %>
+<% User.all_sorted_by_answers.each do |user| %>
+    <p><%= user.name %> answered <%= user.answers.length %></p>
+<% end %>
