@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'answers#new'
   resources :users
   resources :answers
   resources :questions
