@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+
+ nav {
+    background: lightgray;
+    width: 100vw;
+    height: 4rem;
+}
+
+.container {
+    max-width: 70rem;
+}
+
+.errors {
+    margin: 1rem 0;
+    color: red;
+    background: rgb(255, 237, 237);
+    padding: 1rem;
+}
+
+.errors > p {
+    margin: 0;
+}
