@@ -5,7 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Cookie.create([
+
+Cookie.destroy_all
+Instructor.destroy_all
+
+cookies = Cookie.create([
     {name: 'choc chip'},
     {name: 'white choc chip'},
     {name: 'dark choc chip'},
@@ -14,7 +18,10 @@ Cookie.create([
     {name: 'vegan'},
     {name: 'shortbread'},
     {name: 'salted caramel'},
+    {name: 'milkybar wowsomes'},
     {name: 'oat and raisin'},
+    {name: 'dark chocolate digestive (not a cookie)'},
+    {name: 'pret\'s dark chocolate salted caramel vegan'},
     {name: 'm&ms'}
 ])
 
@@ -37,7 +44,8 @@ Cookie.create([
     'julia',
     'kaitlyn',
     'tarryn',
+    'charlie',
     'igor'
 ].each do |name|
-    Instructor.create({ name: name, cookie: Cookie.all.sample })
+    Instructor.create({ name: name, cookie: cookies.sample })
 end

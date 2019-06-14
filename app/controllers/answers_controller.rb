@@ -1,7 +1,8 @@
 class AnswersController < ApplicationController
 
     def new
-        @user = User.new
+        session[:score] ||= 0
+        @user = session[:user_id] ? User.find(session[:user_id]) : User.new
         @instructor = Instructor.all.sample
         @answer = Answer.new
         @options = Cookie.options(@instructor.cookie)
@@ -13,6 +14,8 @@ class AnswersController < ApplicationController
         answer.question = question
         if answer.valid? && answer.user.valid?
             answer.save
+            session[:user_id] = answer.user.id
+            session[:score] += answer.correct ? 1 : 0
             flash[:notice] = answer.correct ? 'Well done!' : 'Wrong!'
             redirect_to new_answer_path
         else
