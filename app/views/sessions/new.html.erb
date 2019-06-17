@@ -1,0 +1,20 @@
+<% if flash[:errors] %>
+    <div class="errors">
+        <h4>Oops!</h4>
+    <% flash[:errors].each do |error| %>
+        <p><%= error %></p>
+    <% end %>
+    </div>
+<% end %>
+<% if flash[:notice] %>
+    <h1><%= flash[:notice] %></h1>
+<% end %>
+<h1>Log in</h2>
+
+<%= form_tag sessions_path do %>
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+    <%= submit_tag %>
+<% end %>
