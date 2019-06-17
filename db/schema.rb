@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2019_06_14_124447) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "answers", force: :cascade do |t|
-    t.integer "question_id"
-    t.integer "cookie_id"
+    t.bigint "question_id"
+    t.bigint "cookie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["cookie_id"], name: "index_answers_on_cookie_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
@@ -31,14 +34,14 @@ ActiveRecord::Schema.define(version: 2019_06_14_124447) do
 
   create_table "instructors", force: :cascade do |t|
     t.string "name"
-    t.integer "cookie_id"
+    t.bigint "cookie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cookie_id"], name: "index_instructors_on_cookie_id"
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer "instructor_id"
+    t.bigint "instructor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["instructor_id"], name: "index_questions_on_instructor_id"
@@ -51,4 +54,8 @@ ActiveRecord::Schema.define(version: 2019_06_14_124447) do
     t.string "password_digest"
   end
 
+  add_foreign_key "answers", "cookies", column: "cookie_id"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "instructors", "cookies", column: "cookie_id"
+  add_foreign_key "questions", "instructors"
 end
